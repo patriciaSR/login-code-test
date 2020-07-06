@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "echo TODO"
+    "test": "echo TODO",
+    "lint": "npm run lint:js",
+    "lint:js": "eslint ."
   },
   "dependencies": {
     "debug": "~2.6.9",
