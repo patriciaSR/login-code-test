@@ -1,0 +1,13 @@
+# VScode folder
+.vscode
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Node Modules folder
+node_modules
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
