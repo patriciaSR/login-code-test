@@ -4,11 +4,16 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "echo TODO"
+    "test": "echo TODO",
+    "lint": "npm run lint:js",
+    "lint:js": "eslint ."
   },
   "dependencies": {
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0"
   }
 }
