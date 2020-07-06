@@ -9,5 +9,15 @@
         "ecmaVersion": 11
     },
     "rules": {
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "tests/*.js"
+            ],
+            "env": {
+                "jest": true
+            }
+        }
+    ]
 }
