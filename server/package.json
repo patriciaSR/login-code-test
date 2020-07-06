@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "echo TODO",
+    "test": "jest --collect-coverage",
+    "test:watch": "jest --watch",
     "lint": "npm run lint:js",
     "lint:js": "eslint ."
   },
@@ -17,7 +18,9 @@
     "@commitlint/cli": "^9.0.1",
     "@commitlint/config-conventional": "^9.0.1",
     "eslint": "^7.4.0",
-    "husky": "^4.2.5"
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
+    "supertest": "^4.0.2"
   },
   "husky": {
     "hooks": {
