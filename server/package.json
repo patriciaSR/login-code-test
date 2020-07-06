@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "test:watch": "jest --watch",
     "lint": "npm run lint:js",
     "lint:js": "eslint ."
