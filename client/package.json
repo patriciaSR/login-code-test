@@ -5,9 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:unit": "ng test --browsers ChromeHeadless --code-coverage",
+    "test:unit:watch": "ng test --browsers ChromeHeadless --watch",
+    "test:e2e": "ng e2e",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
