@@ -21,13 +21,13 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-  
+
     - name: Setup Node.js environment
       uses: actions/setup-node@v2.1.0
       with:
         # Version Spec of the version to use.  Examples: 12.x, 10.15.1, >=10.15.0
         node-version: 12.x
-    
+
     - name: "[BACK] Install dependencies"
       working-directory: server
       run: npm ci
@@ -37,9 +37,25 @@ jobs:
       run: |
         npm run lint
         npm run test
-    
-    - name: Coverage
+
+    - name: "[FRONT] Install dependencies"
+      working-directory: client
+      run: npm ci
+
+    - name: "[FRONT] Run linters and tests"
+      working-directory: client
+      run: |
+        npm run lint
+        npm run test
+
+    - name: Merge coverage
+      run: |
+        mkdir coverage
+        cp server/coverage/clover.xml coverage/server.xml
+        cp client/coverage/client/clover.xml coverage/client.xml
+
+    - name: Upload coverage
       uses: codecov/codecov-action@v1
       with:
-        file: ./server/coverage/clover.xml
-    
+        file: coverage
+
