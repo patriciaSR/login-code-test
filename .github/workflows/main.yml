@@ -51,10 +51,11 @@ jobs:
     - name: Merge coverage
       run: |
         mkdir coverage
-        npx cobertura-merge -o coverage/clover.xml package1=server/coverage/clover.xml package2=client/coverage/clover.xml
+        cp server/coverage/clover.xml coverage/server.xml
+        cp client/coverage/clover.xml coverage/client.xml
 
     - name: Upload coverage
       uses: codecov/codecov-action@v1
       with:
-        file: ./coverage/clover.xml
+        file: ./coverage/
 
