@@ -51,8 +51,7 @@ jobs:
     - name: Merge coverage
       run: |
         mkdir coverage
-        npm install -g junit-merge
-        junit-merge -o coverage/clover.xml server/coverage/clover.xml client/coverage/client/clover.xml
+        npx cobertura-merge -o coverage/clover.xml package1=server/coverage/clover.xml package2=client/coverage/clover.xml
 
     - name: Upload coverage
       uses: codecov/codecov-action@v1
