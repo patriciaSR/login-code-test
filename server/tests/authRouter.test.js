@@ -31,5 +31,21 @@ describe('Login', () => {
     expect(response.status).toBe(401);
     expect(response.body.message).toBe('Usuario o contraseña incorrectos');
   });
-})
+});
+
+describe('Logout', () => {
+  it('deletes the token if token exists', async () => {
+    const response = await request
+      .delete('/auth/xxxxxxx');
+
+    expect(response.status).toBe(200);
+  });
+
+  it('does not delete the token if token not exists', async () => {
+    const response = await request
+      .delete('/auth');
+
+    expect(response.status).toBe(400);
+  });
+});
 
