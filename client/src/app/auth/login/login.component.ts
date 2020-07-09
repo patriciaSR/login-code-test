@@ -32,6 +32,12 @@ export class LoginComponent implements OnInit {
   login($event: Event) {
     $event.preventDefault();
 
+    if (!this.form.valid) {
+      this.form.markAllAsTouched();
+      this.errorText = 'invalid username or password';
+      return
+    }
+
     this.subcription = this.loginService.getToken(this.form.value).subscribe(
       (response) => {
         this.userToken = response;
