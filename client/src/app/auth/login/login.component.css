@@ -13,3 +13,17 @@ input {
 input::placeholder {
   color: #ccc;
 }
+input.ng-touched.ng-invalid {
+  border-color: rgb(235, 164, 156);;
+}
+input.ng-touched.ng-invalid::placeholder {
+  color: rgb(235, 164, 156);;
+}
+.errorLogin {
+  min-height: 44px;
+  padding-top: 20px;
+  color: red;
+}
+p {
+  margin: 0;
+}

@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 router.post('/', (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  const isRegisteredUser = username === 'hello@email.com' && password === 'hello1234';
+  const isRegisteredUser = email === 'hello@email.com' && password === 'hello1234';
 
   if (isRegisteredUser) {
     res.status(200).json({
       user: {
-        email: username
+        email
       },
       token: 'xxxxxxx'
     });
