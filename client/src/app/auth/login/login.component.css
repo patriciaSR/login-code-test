@@ -10,7 +10,6 @@ input {
   border: 1px solid #ececec;
   box-shadow: inset 0px 1px 4px #cecece;
 }
-
 input::placeholder {
   color: #ccc;
 }
