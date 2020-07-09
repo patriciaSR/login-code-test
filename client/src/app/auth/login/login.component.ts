@@ -29,13 +29,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login($event: Event) {
+  login($event: Event): void {
     $event.preventDefault();
 
     if (!this.form.valid) {
       this.form.markAllAsTouched();
-      this.errorText = 'invalid username or password';
-      return
+      this.errorText = 'Invalid username or password';
+      return;
     }
 
     this.subcription = this.loginService.getToken(this.form.value).subscribe(
@@ -45,8 +45,10 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       },
       (error) => {
-        this.errorText = 'invalid username or password';
-        console.log(error);
+        this.errorText = 'Invalid username or password';
+      },
+      () => {
+        this.subcription.unsubscribe();
       });
   }
 }
