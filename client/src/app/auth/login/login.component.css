@@ -1,0 +1,15 @@
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 100px 30px 50px;
+  margin: auto;
+  border: 1px solid #eee;
+  border-radius: 15px;
+}
+input {
+  border: 1px solid #ececec;
+  box-shadow: inset 0px 1px 4px #cecece;
+}
+input::placeholder {
+  color: #ccc;
+}
