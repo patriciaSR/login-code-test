@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { LayoutsModule } from './layouts/layouts.module';
 
 const apiConfig = {
-  api: 'https://localhost:3000'
+  api: 'http://localhost:3000'
 };
 
 

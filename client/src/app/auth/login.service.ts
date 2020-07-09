@@ -10,15 +10,13 @@ export class LoginService {
 
   constructor(private http: HttpClient, @Inject('apiConfig') private apiConfig) { }
 
-  getToken(body): Observable<TokenDTO> {
-    const auth = btoa(`${body.username}:${body.password}`);
+  getToken(body: {}): Observable<TokenDTO> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Basic ' + auth
+        'Content-Type': 'application/json'
       })
     };
 
-    return this.http.post<TokenDTO>(this.apiConfig.api + '/login', '', httpOptions);
+    return this.http.post<TokenDTO>(this.apiConfig.api + '/auth', body, httpOptions);
   }
 }
