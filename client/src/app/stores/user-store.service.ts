@@ -34,12 +34,12 @@ export class UserStoreService extends Store<TokenDTO> {
     return this.get();
   }
 
-  saveUserData(userData: TokenDTO) {
+  saveUserData(userData: TokenDTO): void {
     sessionStorage.setItem('userData', JSON.stringify(userData));
     this.store(userData);
   }
 
-  deleteUserData() {
+  deleteUserData(): void {
     sessionStorage.clear();
     this.store(emptyUserData);
   }
