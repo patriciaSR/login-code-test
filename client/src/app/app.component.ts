@@ -11,15 +11,15 @@ import { UserStoreService } from 'src/app/stores/user-store.service';
 
 export class AppComponent implements OnInit {
   title = 'Login-codeTest-Karumi';
-  userLogin: boolean;
+  userLogged: boolean;
   userData: UserData;
 
   constructor(private userStore: UserStoreService){}
 
   ngOnInit(): void {
-    this.userLogin = this.userStore.isLogin();
+    this.userLogged = this.userStore.isLogin();
 
-    if (this.userLogin) {
+    if (this.userLogged) {
       this.userData =  this.userStore.getUserData().user;
     }
   }

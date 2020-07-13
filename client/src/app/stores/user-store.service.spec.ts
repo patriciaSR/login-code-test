@@ -16,7 +16,6 @@ describe('UserStoreService', () => {
   let service: UserStoreService;
   let store: Store<TokenDTO>;
 
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -56,19 +55,18 @@ describe('UserStoreService', () => {
   });
 
   it('should return undefinend without userData on getUserData() method', () => {
-
     const result = service.getUserData();
     expect(result).toBe(undefined);
   });
 
-    it('should calls this.store with userData on saveUserData() method', () => {
-      const spyStore = spyOn(service, 'store');
+  it('should calls this.store with userData on saveUserData() method', () => {
+    const spyStore = spyOn(service, 'store');
 
     service.saveUserData(FAKE_LOGIN);
-    expect(spyStore).toHaveBeenCalled();
+    expect(spyStore).toHaveBeenCalledWith(FAKE_LOGIN);
   });
 
-  it('should clear sessionstore ans store class on deleteUserData() method ', () => {
+  it('should clear sessionstore and store class on deleteUserData() method', () => {
     const spySession = spyOn(window.sessionStorage, 'clear');
 
     service.deleteUserData();
