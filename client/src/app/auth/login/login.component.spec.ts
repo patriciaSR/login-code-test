@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of, throwError } from 'rxjs';
 import { FAKE_LOGIN } from '../../fixtures/fake-login';
 import { LoginService } from '../login.service';
 import { LoginComponent } from './login.component';
@@ -59,33 +58,35 @@ describe('LoginComponent', () => {
     expect(spyRouter).not.toHaveBeenCalled();
   });
 
-  it('should redirect to home if user is valid', () => {
+  it('should redirect to home if user is valid', async () => {
     const event = jasmine.createSpyObj('e', ['preventDefault']);
-    const spyService = spyOn(loginService, 'getToken').and.callFake(() => of(FAKE_LOGIN));
+    const spyService = spyOn(loginService, 'getToken').and.callFake(() => Promise.resolve(FAKE_LOGIN));
     const spyRouter = spyOn(router, 'navigate');
 
     component.form.setValue({
       email: 'test@email.com',
       password: 'passtest'
     });
-    component.login(event);
+
+    await component.login(event);
 
     expect(event.preventDefault).toHaveBeenCalled();
     expect(spyService).toHaveBeenCalled();
     expect(spyRouter).toHaveBeenCalledWith(['home']);
   });
 
-  it('should redirect to home if user is valid', () => {
+  it('should not redirect to home if user is not valid', async () => {
     const event = jasmine.createSpyObj('e', ['preventDefault']);
     const error = new Error();
-    const spyService = spyOn(loginService, 'getToken').and.callFake(() => throwError(error));
+    const spyService = spyOn(loginService, 'getToken').and.callFake(() => Promise.reject(error));
     const spyRouter = spyOn(router, 'navigate');
 
     component.form.setValue({
       email: 'bad@email.com',
       password: 'badpass'
     });
-    component.login(event);
+
+    await component.login(event);
 
     expect(event.preventDefault).toHaveBeenCalled();
     expect(spyService).toHaveBeenCalled();

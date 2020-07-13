@@ -7,5 +7,7 @@ export abstract class Store<T> {
 
     get$ = (): Observable<T> => this.state$.asObservable();
 
-    store = (nextState: T) => this.state$.next(nextState);
+    public store (nextState: T) {
+      this.state$.next(nextState);
+    }
 }

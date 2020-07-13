@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { TokenDTO } from '../models/token-dto.model';
 import { Store } from '../state/store';
 
@@ -16,10 +17,6 @@ const emptyUserData: TokenDTO = {
 
 export class UserStoreService extends Store<TokenDTO> {
 
-  constructor() {
-    super();
-  }
-
   isLogin(): boolean {
     const userData = sessionStorage.getItem('userData');
     if (userData) {
@@ -34,13 +31,25 @@ export class UserStoreService extends Store<TokenDTO> {
     return this.get();
   }
 
+  getUserDataSuscription(): Observable<TokenDTO> {
+    return this.get$();
+  }
+
   saveUserData(userData: TokenDTO): void {
-    sessionStorage.setItem('userData', JSON.stringify(userData));
     this.store(userData);
   }
 
   deleteUserData(): void {
-    sessionStorage.clear();
     this.store(emptyUserData);
+  }
+
+  store(value: TokenDTO): void {
+    super.store(value);
+
+    if (value === emptyUserData) {
+      sessionStorage.clear();
+    } else {
+      sessionStorage.setItem('userData', JSON.stringify(value));
+    }
   }
 }

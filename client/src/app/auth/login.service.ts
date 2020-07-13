@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { TokenDTO } from '../models/token-dto.model';
 
 @Injectable({
@@ -10,13 +9,13 @@ export class LoginService {
 
   constructor(private http: HttpClient, @Inject('apiConfig') private apiConfig) { }
 
-  getToken(body: {}): Observable<TokenDTO> {
+  async getToken(body: {}): Promise<TokenDTO> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
 
-    return this.http.post<TokenDTO>(this.apiConfig.api + '/auth', body, httpOptions);
+    return await this.http.post<TokenDTO>(this.apiConfig.api + '/auth', body, httpOptions).toPromise();
   }
 }
