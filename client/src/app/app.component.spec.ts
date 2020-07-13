@@ -1,17 +1,31 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './auth/login/login.component';
 import { FAKE_LOGIN } from './fixtures/fake-login';
 import { UserStoreService } from './stores/user-store.service';
+
+const apiConfig = {
+  api: 'http://localhost:3000'
+};
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let service: UserStoreService;
+  let router: Router;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule.withRoutes([
+        { path: 'login', component: LoginComponent}
+      ])
+    ],
+    providers: [{ provide: 'apiConfig', useValue: apiConfig }],
       declarations: [
         AppComponent
       ],
@@ -22,6 +36,7 @@ describe('AppComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     service = TestBed.inject(UserStoreService);
+    router = TestBed.inject(Router);
 
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -35,15 +50,14 @@ describe('AppComponent', () => {
     expect(component.title).toEqual('Login-codeTest-Karumi');
   });
 
-  it(`should call userStore service to check if user is logged`, () => {
-    const spyIsLogin = spyOn(service, 'isLogin').and.returnValue(true);
-    const spyGetUserData = spyOn(service, 'getUserData').and.returnValue(FAKE_LOGIN);
+  it(`should redirect to login page if session expired`, () => {
+    const spyRouter = spyOn(router, 'navigate');
+    service.saveUserData(FAKE_LOGIN);
 
     component.ngOnInit();
 
-    expect(component.userLogged).toBe(true);
-    expect(spyIsLogin).toHaveBeenCalled();
-    expect(spyGetUserData).toHaveBeenCalled();
-    expect(component.userData).toEqual(FAKE_LOGIN.user);
+    service.deleteUserData();
+
+    expect(spyRouter).toHaveBeenCalledWith(['login']);
   });
 });

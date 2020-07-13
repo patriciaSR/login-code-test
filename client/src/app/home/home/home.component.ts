@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     this.userData =  this.userStore.getUserData();
   }
 
-  logout():void {
+  logout(): void {
     this.userStore.deleteUserData();
   }
 }

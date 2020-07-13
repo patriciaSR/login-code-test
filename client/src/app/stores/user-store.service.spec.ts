@@ -31,22 +31,6 @@ describe('UserStoreService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should call sessionStore and return true on isLogin() method', () => {
-    const spySession = spyOn(window.sessionStorage, 'getItem').and.callFake(() => '12345');
-
-    const result = service.isLogin();
-    expect(spySession).toHaveBeenCalledWith('userData');
-    expect(result).toBe(true);
-  });
-
-  it('should call sessionStore and return false on isLogin() method', () => {
-    const spySession = spyOn(window.sessionStorage, 'getItem').and.callFake(() => undefined);
-
-    const result = service.isLogin();
-    expect(spySession).toHaveBeenCalledWith('userData');
-    expect(result).toBe(false);
-  });
-
   it('should return an object with userData on getUserData() method', () => {
     service.saveUserData(FAKE_LOGIN);
 
@@ -73,6 +57,6 @@ describe('UserStoreService', () => {
     expect(spySession).toHaveBeenCalled();
 
     const result = service.getUserData();
-    expect(result).toEqual(emptyUserData);
+    expect(result).toEqual(undefined);
   });
 });

@@ -1,8 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { FAKE_LOGIN } from '../fixtures/fake-login';
-import { TokenDTO } from '../models/token-dto.model';
 import { LoginService } from './login.service';
 
 
@@ -51,9 +49,6 @@ describe('LoginService', () => {
       password: 'invalidpass'
     };
 
-    let response: TokenDTO;
-    let errResponse: HttpErrorResponse;
-
     const mockErrorResponse = { status: 401, statusText: 'Unauthorized' };
 
     const httpMock = TestBed.inject(HttpTestingController);
@@ -67,7 +62,7 @@ describe('LoginService', () => {
       await responsePromise;
 
       expect(true).toBe(false);
-    } catch(errResponse) {
+    } catch (errResponse) {
       expect(request.request.method).toEqual('POST');
       expect(errResponse.status).toBe(401);
       expect(errResponse.statusText).toBe('Unauthorized');
