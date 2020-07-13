@@ -4,29 +4,11 @@ import { TokenDTO } from '../models/token-dto.model';
 import { Store } from '../state/store';
 
 
-const emptyUserData: TokenDTO = {
-  token: '',
-  user: {
-    email: ''
-  }
-};
-
 @Injectable({
   providedIn: 'root'
 })
 
-export class UserStoreService extends Store<TokenDTO> {
-
-  isLogin(): boolean {
-    const userData = sessionStorage.getItem('userData');
-    if (userData) {
-      this.store(JSON.parse(userData));
-      return true;
-    }
-
-    return false;
-  }
-
+export class UserStoreService extends Store<TokenDTO|undefined> {
   getUserData(): TokenDTO {
     return this.get();
   }
@@ -40,13 +22,13 @@ export class UserStoreService extends Store<TokenDTO> {
   }
 
   deleteUserData(): void {
-    this.store(emptyUserData);
+    this.store(undefined);
   }
 
   store(value: TokenDTO): void {
     super.store(value);
 
-    if (value === emptyUserData) {
+    if (value === undefined) {
       sessionStorage.clear();
     } else {
       sessionStorage.setItem('userData', JSON.stringify(value));

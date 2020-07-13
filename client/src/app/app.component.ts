@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserData } from 'src/app/models/token-dto.model';
+import { Router } from '@angular/router';
 import { UserStoreService } from 'src/app/stores/user-store.service';
 
 
@@ -11,16 +11,19 @@ import { UserStoreService } from 'src/app/stores/user-store.service';
 
 export class AppComponent implements OnInit {
   title = 'Login-codeTest-Karumi';
-  userLogged: boolean;
-  userData: UserData;
 
-  constructor(private userStore: UserStoreService){}
+  constructor(
+    private userStore: UserStoreService,
+    private router: Router
+  ){}
 
   ngOnInit(): void {
-    this.userLogged = this.userStore.isLogin();
-
-    if (this.userLogged) {
-      this.userData =  this.userStore.getUserData().user;
-    }
+    this.userStore.getUserDataSuscription().subscribe(
+      (response) => {
+        if (!response) {
+          this.router.navigate(['login']);
+        }
+      },
+    )
   }
 }

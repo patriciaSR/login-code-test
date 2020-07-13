@@ -28,15 +28,11 @@ describe('AppComponent', () => {
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it(`should have as title 'Login-codeTest-Karumi'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('Login-codeTest-Karumi');
+    expect(component.title).toEqual('Login-codeTest-Karumi');
   });
 
   it(`should call userStore service to check if user is logged`, () => {
