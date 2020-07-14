@@ -21,7 +21,7 @@ A simple login application with user session storage
   * [Client](#client-1)
 - [Contributing](#contributing)
   * [Branch model](#branch-model)
-  * [Pull requests & GitHub Actions](#pull-requests---github-actions)
+  * [Pull requests & GitHub Actions](#pull-requests--github-actions)
 
 ## Project's goal
 
