@@ -1,13 +1,23 @@
 
 {
   "baseUrl": "http://localhost:4200",
-  "fileServerFolder": ".",
-  "fixturesFolder": "./src/fixtures",
-  "integrationFolder": "./src/integration",
-  "pluginsFile": "./src/plugins/index",
-  "supportFile": false,
+  "fixturesFolder": "./cypress/fixtures",
+  "integrationFolder": "./cypress/integration",
+  "pluginsFile": "./cypress/plugins/index",
+  "supportFile": "./cypress/support/index.ts",
+  "testFiles": "**/*.feature",
   "video": false,
   "videosFolder": "../../dist/cypress/client-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/client-e2e/screenshots",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "env": {
+    "apiUrl": "http://localhost:3000/auth",
+    "userData": {
+      "user":{
+        "email": "hello@email.com",
+        "password": "hello1234"
+      },
+      "token":"xxxxxxx"
+    }
+  }
 }
