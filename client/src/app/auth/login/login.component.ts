@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { UserStoreService } from 'src/app/stores/user-store.service';
 import { TokenDTO } from '../../models/token-dto.model';
 import { LoginService } from '../login.service';
 
@@ -14,11 +14,11 @@ import { LoginService } from '../login.service';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   userToken: TokenDTO;
-  subcription: Subscription;
   errorText: string;
 
   constructor(
     private loginService: LoginService,
+    private userStore: UserStoreService,
     private router: Router
   ) { }
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login($event: Event): void {
+  async login($event: Event): Promise<void> {
     $event.preventDefault();
 
     if (!this.form.valid) {
@@ -38,17 +38,13 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.subcription = this.loginService.getToken(this.form.value).subscribe(
-      (response) => {
-        this.userToken = response;
+    try {
+      const response = await this.loginService.getToken(this.form.value);
 
-        this.router.navigate(['home']);
-      },
-      (error) => {
-        this.errorText = 'Invalid username or password';
-      },
-      () => {
-        this.subcription.unsubscribe();
-      });
+      this.userStore.saveUserData(response);
+      this.router.navigate(['home']);
+    } catch (error) {
+      this.errorText = 'Invalid username or password';
+    }
   }
 }
