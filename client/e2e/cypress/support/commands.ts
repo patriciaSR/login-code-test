@@ -10,16 +10,17 @@
 //
 
 Cypress.Commands.add('login', (email, password) => {
-  cy.request({
-    method: 'POST',
-    url: Cypress.env('apiUrl'),
-    body: {
-      email,
-      password
-    }
-  })
+  cy.visit('/login');
+
+  cy.get('input[formControlName="email"]').type('hello@email.com');
+  cy.get('input[formControlName="password"]').type('hello1234');
+  cy.get('button[type="submit"]').click();
+
+  cy.wait('@login')
+  .its('status')
+  .should('be', 200)
   .then((response) => {
-    window.sessionStorage.setItem('userData', JSON.stringify(response.body));
+    window.sessionStorage.setItem('userData', JSON.stringify(response));
   });
 });
 

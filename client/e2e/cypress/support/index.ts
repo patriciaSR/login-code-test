@@ -15,3 +15,12 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands';
+
+before(() => {
+  cy.server();
+  cy.route({
+    method: 'POST',
+    url: 'http://localhost:3000/auth',
+    response: Cypress.env('userData')
+  }).as('login');
+});

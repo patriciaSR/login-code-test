@@ -3,6 +3,7 @@ import { And, Given, Then, When } from "cypress-cucumber-preprocessor/steps";
 
 Given('Im logged in page', () => {
   const { email, password } = Cypress.env('userData').user;
+
   cy.login(email, password);
 })
 

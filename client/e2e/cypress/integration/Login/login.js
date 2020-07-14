@@ -12,6 +12,10 @@ When('I fill email and password fields', () => {
 
 And('I click on login button', () => {
   cy.get('button[type="submit"]').click();
+
+  cy.wait('@login')
+  .its('status')
+  .should('be', 200);
 })
 
 Then('I see home page', () => {
