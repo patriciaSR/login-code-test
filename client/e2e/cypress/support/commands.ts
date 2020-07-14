@@ -19,6 +19,11 @@ Cypress.Commands.add('login', (email, password) => {
     }
   })
   .then((response) => {
-    window.sessionStorage.setItem('userData', JSON.stringify(response));
-  })
-})
+    window.sessionStorage.setItem('userData', JSON.stringify(response.body));
+  });
+});
+
+Cypress.Commands.add('clearSessionStorage', () => {
+  window.sessionStorage.clear();
+  cy.log(JSON.stringify(window.sessionStorage));
+});
