@@ -11,6 +11,3 @@ node_modules
 # Coverage directory used by tools like istanbul
 coverage
 *.lcov
-
-# reports folder
-e2e/cypress/reports
