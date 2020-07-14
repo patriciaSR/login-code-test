@@ -9,7 +9,7 @@ A simple login application with user session storage
 
 ## Table of Contents
 
-- [Project's goal](#project-s-goal)
+- [Project's goal](#projects-goal)
 - [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
