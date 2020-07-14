@@ -1,11 +1,11 @@
 
 {
   "baseUrl": "http://localhost:4200",
-  "fileServerFolder": ".",
-  "fixturesFolder": "./src/fixtures",
-  "integrationFolder": "./src/integration",
-  "pluginsFile": "./src/plugins/index",
+  "fixturesFolder": "./cypress/fixtures",
+  "integrationFolder": "./cypress/integration",
+  "pluginsFile": "./cypress/plugins/index",
   "supportFile": false,
+  "testFiles": "**/*.feature",
   "video": false,
   "videosFolder": "../../dist/cypress/client-e2e/videos",
   "screenshotsFolder": "../../dist/cypress/client-e2e/screenshots",
